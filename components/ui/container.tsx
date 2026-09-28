@@ -1,30 +1,18 @@
-import type { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
 
 import { cn } from '@/lib/cn';
 
-type ContainerProps<T extends ElementType = 'div'> = {
-  as?: T;
-  children: ReactNode;
-  className?: string;
-} & Omit<ComponentPropsWithoutRef<T>, 'as' | 'children' | 'className'>;
-
-export function Container<T extends ElementType = 'div'>({
-  as,
-  children,
+export function Container({
   className,
   ...props
-}: ContainerProps<T>) {
-  const Component = as ?? 'div';
-
+}: ComponentPropsWithoutRef<'div'>) {
   return (
-    <Component
+    <div
       className={cn(
         'mx-auto w-full max-w-[1440px] px-4 sm:px-8 lg:px-12',
         className,
       )}
       {...props}
-    >
-      {children}
-    </Component>
+    />
   );
 }

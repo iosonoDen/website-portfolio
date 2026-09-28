@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+const DURATION_MS = 900;
+
 type CountUpProps = {
   value: number;
   suffix?: string;
@@ -13,53 +15,44 @@ export function CountUp({ value, suffix = '' }: CountUpProps) {
 
   useEffect(() => {
     const node = ref.current;
-    if (!node) return;
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setDisplay(value);
+    if (
+      !node ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
       return;
     }
 
     let frame = 0;
-    let started = false;
-
-    const animate = () => {
-      if (started) return;
-      started = true;
-      setDisplay(0);
-
-      const duration = 900;
-      const start = performance.now();
-
-      const tick = (now: number) => {
-        const progress = Math.min((now - start) / duration, 1);
-        const eased = 1 - (1 - progress) ** 3;
-        setDisplay(Math.round(value * eased));
-        if (progress < 1) {
-          frame = window.requestAnimationFrame(tick);
-        }
-      };
-
-      frame = window.requestAnimationFrame(tick);
-    };
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry?.isIntersecting) animate();
+        if (!entry?.isIntersecting) {
+          return;
+        }
+
+        observer.disconnect();
+        const start = performance.now();
+
+        const tick = (now: number) => {
+          const progress = Math.min((now - start) / DURATION_MS, 1);
+          setDisplay(Math.round(value * (1 - (1 - progress) ** 3)));
+
+          if (progress < 1) {
+            frame = requestAnimationFrame(tick);
+          }
+        };
+
+        frame = requestAnimationFrame(tick);
       },
       { threshold: 0.35 },
     );
 
     observer.observe(node);
 
-    const rect = node.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      animate();
-    }
-
     return () => {
       observer.disconnect();
-      window.cancelAnimationFrame(frame);
+      cancelAnimationFrame(frame);
     };
   }, [value]);
 

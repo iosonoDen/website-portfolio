@@ -1,63 +1,39 @@
-import Link from 'next/link';
-import type { ComponentPropsWithoutRef, ReactNode } from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
 
 import { cn } from '@/lib/cn';
 
-type ButtonProps = {
-  children: ReactNode;
-  href?: string;
-  download?: string | boolean;
-  variant?: 'primary' | 'secondary' | 'ghost' | 'text';
-  className?: string;
-} & Omit<ComponentPropsWithoutRef<'button'>, 'children' | 'className'>;
-
 const styles = {
   primary: 'bg-[var(--accent-strong)] text-[#140804]',
-  secondary: 'border border-[var(--accent-strong)] bg-transparent text-[var(--accent-strong)]',
+  secondary:
+    'border border-[var(--accent-strong)] bg-transparent text-[var(--accent-strong)]',
   ghost: 'border border-[var(--line)] bg-white/[0.03] text-[var(--ink)]',
   text: 'px-0 text-[var(--ink)] underline-offset-8',
 };
 
+type ButtonProps = ComponentPropsWithoutRef<'a'> & {
+  href: string;
+  variant?: keyof typeof styles;
+};
+
 export function Button({
-  children,
   href,
-  download,
   variant = 'primary',
-  className = '',
+  className,
   ...props
 }: ButtonProps) {
-  const shared = cn(
-    'interactive-hit inline-flex min-h-11 items-center justify-center gap-2 overflow-visible rounded-full px-5 text-sm font-semibold tracking-[-0.01em] touch-manipulation',
-    styles[variant],
-    className,
-  );
-
-  if (href) {
-    const hash = href.startsWith('#') || href.startsWith('/#');
-    const external = href.startsWith('http');
-    const mail = href.startsWith('mailto:');
-    const fileLink = Boolean(download) || href.endsWith('.pdf');
-
-    if (hash || fileLink || external || mail) {
-      return (
-        <a
-          className={shared}
-          href={href}
-          download={fileLink ? download || true : undefined}
-          target={external ? '_blank' : undefined}
-          rel={external ? 'noreferrer' : undefined}
-        >
-          {children}
-        </a>
-      );
-    }
-
-    return <Link className={shared} href={href}>{children}</Link>;
-  }
+  const external = href.startsWith('http');
 
   return (
-    <button className={shared} type="button" {...props}>
-      {children}
-    </button>
+    <a
+      className={cn(
+        'interactive-hit inline-flex min-h-11 touch-manipulation items-center justify-center gap-2 overflow-visible rounded-full px-5 text-sm font-semibold tracking-[-0.01em]',
+        styles[variant],
+        className,
+      )}
+      href={href}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noreferrer' : undefined}
+      {...props}
+    />
   );
 }
