@@ -8,7 +8,7 @@ export type ImageAsset = {
 };
 
 export type SocialLink = {
-  label: string;
+  label: 'Email' | 'LinkedIn' | 'GitHub' | 'Instagram';
   href: string;
 };
 

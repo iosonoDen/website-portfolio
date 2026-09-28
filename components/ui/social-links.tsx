@@ -1,3 +1,5 @@
+import type { ComponentType } from 'react';
+
 import {
   EmailIcon,
   GitHubIcon,
@@ -5,41 +7,23 @@ import {
   LinkedInIcon,
 } from '@/components/ui/social-icons';
 import { profile } from '@/content/profile';
+import type { SocialLink } from '@/types/content';
 
-const socialLinks = [
-  {
-    label: 'Email',
-    href: `mailto:${profile.email}`,
-    icon: EmailIcon,
-  },
-  {
-    label: 'LinkedIn',
-    href:
-      profile.social.find((item) => item.label === 'LinkedIn')?.href ??
-      'https://www.linkedin.com/in/dennisoteri/',
-    icon: LinkedInIcon,
-  },
-  {
-    label: 'GitHub',
-    href:
-      profile.social.find((item) => item.label === 'GitHub')?.href ??
-      'https://github.com/iosonoDen',
-    icon: GitHubIcon,
-  },
-  {
-    label: 'Instagram',
-    href:
-      profile.social.find((item) => item.label === 'Instagram')?.href ??
-      'https://www.instagram.com/dennis.oteri/',
-    icon: InstagramIcon,
-  },
-];
+const icons: Record<
+  SocialLink['label'],
+  ComponentType<{ className?: string }>
+> = {
+  Email: EmailIcon,
+  LinkedIn: LinkedInIcon,
+  GitHub: GitHubIcon,
+  Instagram: InstagramIcon,
+};
 
 export function SocialLinks() {
   return (
     <ul className="flex flex-wrap items-center gap-2 sm:gap-3">
-      {socialLinks.map((item) => {
-        const Icon = item.icon;
+      {profile.social.map((item) => {
+        const Icon = icons[item.label];
         const external = item.href.startsWith('http');
 
         return (

@@ -11,7 +11,7 @@ export function SiteFooter() {
           {versionLabel}
         </p>
         <p className="text-center text-xs text-[var(--muted)] sm:text-sm">
-          © 2026 Copyright - Oteri Dennis, Milan
+          © {new Date().getFullYear()} Copyright - Oteri Dennis, Milan
         </p>
         <p className="invisible text-xs tracking-wide" aria-hidden="true">
           {versionLabel}

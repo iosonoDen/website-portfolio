@@ -89,13 +89,10 @@ textarea {
   z-index: 0;
   isolation: isolate;
   overflow: visible;
-  cursor: pointer;
-  transform: translateZ(0) scale(1);
   transition:
     transform 0.35s var(--ease-out),
     box-shadow 0.35s var(--ease-out),
     filter 0.18s ease;
-  will-change: transform;
 }
 
 .interactive-hit::after {
@@ -122,7 +119,7 @@ textarea {
 @media (hover: hover) and (pointer: fine) {
   .interactive-hit:hover {
     z-index: 1;
-    transform: translateZ(0) scale(1.07);
+    transform: scale(1.07);
     box-shadow:
       0 0 0 2px rgba(255, 255, 255, 0.18),
       0 12px 40px rgba(255, 255, 255, 0.28);
@@ -135,7 +132,7 @@ textarea {
 }
 
 .interactive-hit:active {
-  transform: translateZ(0) scale(0.96);
+  transform: scale(0.96);
   filter: brightness(0.62);
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
 }
