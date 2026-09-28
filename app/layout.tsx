@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
 
 import { profile } from '@/content/profile';
-import { siteName } from '@/content/site';
+import { shareImage, siteName } from '@/content/site';
 
 import './globals.css';
 
@@ -14,6 +14,15 @@ const inter = Inter({
 });
 
 const description = profile.lede;
+
+const images = [
+  {
+    url: shareImage.src,
+    width: shareImage.width,
+    height: shareImage.height,
+    alt: shareImage.alt,
+  },
+];
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -38,27 +47,14 @@ export const metadata: Metadata = {
     description,
     type: 'website',
     locale: 'en_US',
-    images: [
-      {
-        url: profile.photo.src,
-        width: profile.photo.width,
-        height: profile.photo.height,
-        alt: profile.photo.alt,
-      },
-    ],
+    url: '/',
+    images,
   },
   twitter: {
     card: 'summary_large_image',
     title: siteName,
     description,
-    images: [
-      {
-        url: profile.photo.src,
-        width: profile.photo.width,
-        height: profile.photo.height,
-        alt: profile.photo.alt,
-      },
-    ],
+    images,
   },
 };
 

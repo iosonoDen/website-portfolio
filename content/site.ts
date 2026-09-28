@@ -1,3 +1,4 @@
+import { profile } from '@/content/profile';
 import type { ImageAsset, PublicPath } from '@/types/content';
 
 export const aboutStory = [
@@ -28,3 +29,11 @@ export const cv: { href: PublicPath; label: string; filename: string } = {
 };
 
 export const siteName = 'Dennis Oteri - Portfolio';
+
+// Link previews: 1200x630 JPEG, because LinkedIn does not reliably render WebP.
+export const shareImage: ImageAsset = {
+  src: '/images/og-image.jpg',
+  alt: profile.photo.alt,
+  width: 1200,
+  height: 630,
+};
