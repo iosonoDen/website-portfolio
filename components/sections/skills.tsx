@@ -3,13 +3,10 @@ import { Container } from '@/components/ui/container';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { skillIcons } from '@/components/ui/skill-icons';
 import { skillGroups } from '@/content/skills';
+import type { SkillItem } from '@/types/content';
 
-function SkillTile({ id, label }: { id: string; label: string }) {
+function SkillTile({ id, label }: SkillItem) {
   const Icon = skillIcons[id];
-
-  if (!Icon) {
-    return null;
-  }
 
   return (
     <li>

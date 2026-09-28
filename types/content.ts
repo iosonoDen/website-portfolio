@@ -1,3 +1,5 @@
+import type { SkillIconId } from '@/components/ui/skill-icons';
+
 export type PublicPath = `/${string}`;
 
 export type ImageAsset = {
@@ -19,7 +21,7 @@ export type Stat = {
 };
 
 export type SkillItem = {
-  id: string;
+  id: SkillIconId;
   label: string;
 };
 

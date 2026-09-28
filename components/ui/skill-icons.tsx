@@ -319,7 +319,7 @@ function UserCenteredIcon({ className }: IconProps) {
   );
 }
 
-export const skillIcons: Record<string, ComponentType<IconProps>> = {
+export const skillIcons = {
   typescript: TypeScriptIcon,
   react: ReactIcon,
   nextjs: NextIcon,
@@ -344,4 +344,6 @@ export const skillIcons: Record<string, ComponentType<IconProps>> = {
   figma: FigmaIcon,
   canva: CanvaIcon,
   'user-centered': UserCenteredIcon,
-};
+} satisfies Record<string, ComponentType<IconProps>>;
+
+export type SkillIconId = keyof typeof skillIcons;
