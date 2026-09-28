@@ -1,5 +1,4 @@
 import { EmailFab } from '@/components/layout/email-fab';
-import { HashScroll } from '@/components/layout/hash-scroll';
 import { SiteFooter } from '@/components/layout/site-footer';
 import { SiteHeader } from '@/components/layout/site-header';
 import { SkipLink } from '@/components/layout/skip-link';
@@ -16,7 +15,6 @@ export default function HomePage() {
   return (
     <>
       <SkipLink />
-      <HashScroll />
       <RevealObserver />
       <CursorGlow />
       <SiteHeader />
