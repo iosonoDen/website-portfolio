@@ -1,3 +1,12 @@
+export type PublicPath = `/${string}`;
+
+export type ImageAsset = {
+  src: PublicPath;
+  alt: string;
+  width: number;
+  height: number;
+};
+
 export type SocialLink = {
   label: string;
   href: string;
@@ -34,12 +43,7 @@ export type CaseStudy = {
   id: string;
   title: string;
   description: string;
-  image: {
-    src: string;
-    alt: string;
-    width: number;
-    height: number;
-  };
+  image: ImageAsset;
 };
 
 export type Profile = {
@@ -49,12 +53,7 @@ export type Profile = {
   email: string;
   headline: string;
   lede: string;
-  photo: {
-    src: string;
-    alt: string;
-    width: number;
-    height: number;
-  };
+  photo: ImageAsset;
   social: SocialLink[];
   stats: Stat[];
 };

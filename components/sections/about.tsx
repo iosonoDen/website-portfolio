@@ -4,6 +4,7 @@ import { Reveal } from '@/components/motion/reveal';
 import { Container } from '@/components/ui/container';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { aboutPhoto, aboutStory } from '@/content/site';
+import { withBasePath } from '@/lib/base-path';
 
 export function About() {
   return (
@@ -25,7 +26,7 @@ export function About() {
         <Reveal delay={0.08} className="order-1 lg:sticky lg:top-28 lg:order-2">
           <div className="overflow-hidden rounded-[1.25rem] bg-[var(--surface)]">
             <Image
-              src={aboutPhoto.src}
+              src={withBasePath(aboutPhoto.src)}
               alt={aboutPhoto.alt}
               width={aboutPhoto.width}
               height={aboutPhoto.height}

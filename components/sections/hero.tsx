@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Container } from '@/components/ui/container';
 import { CountUp } from '@/components/ui/count-up';
 import { profile } from '@/content/profile';
+import { withBasePath } from '@/lib/base-path';
 
 export function Hero() {
   return (
@@ -32,7 +33,7 @@ export function Hero() {
         <div className="relative mx-auto w-full max-w-[22rem] sm:max-w-[28rem] md:col-start-2 md:row-span-3 md:mx-0 md:h-full md:max-w-none">
           <div className="relative aspect-[767/895] overflow-hidden rounded-[1.25rem] bg-[#c2410c] md:absolute md:inset-x-0 md:-bottom-8 md:-top-8 md:aspect-auto">
             <Image
-              src={profile.photo.src}
+              src={withBasePath(profile.photo.src)}
               alt={profile.photo.alt}
               fill
               priority

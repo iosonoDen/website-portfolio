@@ -6,6 +6,7 @@ import { createPortal } from 'react-dom';
 
 import { Button } from '@/components/ui/button';
 import { cv, navigation } from '@/content/site';
+import { withBasePath } from '@/lib/base-path';
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -133,7 +134,7 @@ export function MobileNav({ open, onOpenChange }: MobileNavProps) {
                 }}
               >
                 <Button
-                  href={cv.href}
+                  href={withBasePath(cv.href)}
                   download={cv.filename}
                   variant="ghost"
                   className="w-full"

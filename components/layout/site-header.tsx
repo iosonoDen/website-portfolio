@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
 import { profile } from '@/content/profile';
 import { cv, navigation } from '@/content/site';
+import { withBasePath } from '@/lib/base-path';
 import { cn } from '@/lib/cn';
 
 export function SiteHeader() {
@@ -37,7 +38,7 @@ export function SiteHeader() {
           }}
         >
           <Image
-            src="/brand/logo-do.png"
+            src={withBasePath('/brand/logo-do.png')}
             alt=""
             width={90}
             height={60}
@@ -64,7 +65,7 @@ export function SiteHeader() {
         </nav>
         <div className="flex items-center gap-3 justify-self-end">
           <Button
-            href={cv.href}
+            href={withBasePath(cv.href)}
             download={cv.filename}
             variant="ghost"
             className="hidden md:inline-flex"

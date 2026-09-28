@@ -4,6 +4,7 @@ import { Reveal } from '@/components/motion/reveal';
 import { Container } from '@/components/ui/container';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { caseStudies } from '@/content/work';
+import { withBasePath } from '@/lib/base-path';
 
 export function Work() {
   return (
@@ -21,7 +22,7 @@ export function Work() {
             <Reveal key={study.id} delay={index * 0.08}>
               <article className="relative flex min-h-[20rem] flex-col justify-end overflow-hidden border border-[var(--line)] bg-[var(--surface-elevated)] p-5 transition-transform duration-300 sm:min-h-[24rem] sm:p-8 md:hover:-translate-y-1">
                 <Image
-                  src={study.image.src}
+                  src={withBasePath(study.image.src)}
                   alt={study.image.alt}
                   fill
                   sizes="(min-width: 1024px) 50vw, 100vw"
